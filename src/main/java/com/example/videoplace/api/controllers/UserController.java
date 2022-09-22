@@ -1,6 +1,7 @@
 package com.example.videoplace.api.controllers;
 
 import com.example.videoplace.api.configs.BcryptConfig;
+import com.example.videoplace.api.dtos.UserCreateDto;
 import com.example.videoplace.api.dtos.UserDto;
 import com.example.videoplace.api.models.UserModel;
 import com.example.videoplace.api.services.UserService;
@@ -37,7 +38,13 @@ public class UserController {
 
         userModel.setPassword(passwordHash);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userModel));
+        UserModel userCreated = userService.save(userModel);
+
+        UserCreateDto userCreateDto = new UserCreateDto();
+
+        BeanUtils.copyProperties(userCreated, userCreateDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCreateDto);
     }
 
 
