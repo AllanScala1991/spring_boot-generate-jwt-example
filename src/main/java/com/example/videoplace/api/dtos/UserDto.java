@@ -1,40 +1,26 @@
-package com.example.videoplace.api.models;
+package com.example.videoplace.api.dtos;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "TB_USER")
-public class UserModel implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @Column(nullable = false, unique = true, length = 150)
+public class UserDto {
+    @NotBlank
+    @Size(max = 150)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank
     private String username;
 
-    @Column(nullable = false, unique = false)
+    @NotBlank
     private String password;
 
-    @Column(nullable = false, unique = false, length = 150)
+    @NotBlank
+    @Size(max = 150)
     private String secretQuestion;
 
-    @Column(nullable = false, unique = false, length = 150)
+    @NotBlank
+    @Size(max = 150)
     private String secretAnswer;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
