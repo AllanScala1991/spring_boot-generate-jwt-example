@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class BcryptConfig {
 
-    @Bean
-    @Primary
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
